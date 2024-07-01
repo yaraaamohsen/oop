@@ -1,0 +1,19 @@
+/* global css */
+:root{
+    --mainColor: #272b30;
+    --font: "Comfortaa", cursive;
+}
+body{
+    background-color: var(--mainColor);
+    font-family: var(--font);
+    font-weight: 200;
+    font-size: small;
+}
+.cover img{
+    max-height: 30vh;
+    object-fit: cover;
+}
+nav{
+    background-color: #3A497B;
+}
+
