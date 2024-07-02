@@ -2,6 +2,7 @@ import { UiHome } from "./uiModules.js";
 
 export class Details{
     constructor(gameId){
+		this.display = new UiHome();
 		this.detailsArray={};
 		this.getDetailsApi(gameId);
 	}
@@ -17,8 +18,14 @@ export class Details{
 		let detailsJson = await detailsApi.json();
 		this.detailsArray = detailsJson;
 			console.log(this.detailsArray);
-		let display = new UiHome();
-			console.log(display.gameDetails(this.detailsArray));
-		display.gameDetails(this.detailsArray)
+		this.display.gameDetails(this.detailsArray);
+		this.closeBtn();
+	}
+
+	closeBtn(){
+		document.querySelector('.btn-close').addEventListener('click' ,()=>{
+			document.querySelector(".detailsContext").classList.add("d-none");
+			document.querySelector(".display").classList.remove("d-none");
+		})
 	}
 }

@@ -1,13 +1,15 @@
 import { Details } from "./details.js";
 import { UiHome } from "./uiModules.js";
-export class games{
+export class Games{
     constructor(){
         this.getApi("MMORPG");
         this.rowData = document.querySelector('.rowData');
         this.gamesArray = [];
         document.querySelectorAll('.nav-link').forEach(anchor=>{
             anchor.addEventListener('click', e=>{
-                this.getApi(e.target.innerHTML)
+                this.getApi(e.target.innerHTML);
+                document.querySelector('nav ul li a.active').classList.remove('active');
+                anchor.classList.add('active')
             })
         })
     }
@@ -21,26 +23,21 @@ export class games{
         };
         let api = await fetch(`https://free-to-play-games-database.p.rapidapi.com/api/games?category=${category}`, options);
         let gamesJson = await api.json();
-        
         console.log(gamesJson);
         this.gamesArray = gamesJson;
         let display = new UiHome();
         display.displayData(this.gamesArray);
         this.clickOnItem();
         console.log(this);
-
     }
 
     clickOnItem(){
-        // let Details = new details(id);
         document.querySelectorAll(".item").forEach((card) => {
             card.addEventListener("click", () => {
                const id = card.dataset.id;
                console.log(id);
                this.showDetails(id);
                console.log("hello");
-            //    console.log(e.target);
-            //    console.log(this);
             });
          });
     }
